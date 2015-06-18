@@ -68,5 +68,6 @@ theme: next
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-    type: git
+    type: github
     repo: git@github.com:lucienevans/lucienwang.github.io.git
+    branch: master
