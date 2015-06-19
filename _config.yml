@@ -71,6 +71,11 @@ deploy:
     type: git
     repo: git@github.com:lucienevans/lucienevans.github.io.git
     branch: master
+
+# Pagination #分页
+per_page: 7 #每页文章数，设置成 0 禁用分页
+pagination_dir: page 
+
 # =============================================================================
 # # NexT Theme configuration
 # # =============================================================================

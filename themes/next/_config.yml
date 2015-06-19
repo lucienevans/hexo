@@ -3,8 +3,8 @@ menu:
   home: /
   categories: /categories
   archives: /archives
+  tags: /tags
   about: /about
-  #tags: /tags
   #commonweal: /404.html
 
 # Place your favicon.ico to /source directory.
