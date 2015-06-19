@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: 心中尚未崩坏的地方
+subtitle: 只要心够透明，就能折射阳光
 description:
-author: John Doe
-language:
+author: Lucien Wang
+language: zh-Hans
 timezone:
 
 # URL
@@ -110,6 +110,9 @@ baidu_analytics: 50c15455e37f70aea674ff4a663eef27
 
 # 站点起始时间
 since: 2014
+
+# 头像
+avatar: /images/avatar.jpg
 # =============================================================================
 # End NexT Theme configuration
 # =============================================================================
