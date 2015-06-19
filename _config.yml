@@ -72,10 +72,6 @@ deploy:
     repo: git@github.com:lucienevans/lucienevans.github.io.git
     branch: master
 
-# Pagination #分页
-per_page: 7 #每页文章数，设置成 0 禁用分页
-pagination_dir: page 
-
 # =============================================================================
 # # NexT Theme configuration
 # # =============================================================================
@@ -114,7 +110,7 @@ google_analytics:
 baidu_analytics: 50c15455e37f70aea674ff4a663eef27
 
 # 站点起始时间
-since: 2014
+since: 2015
 
 # 头像
 avatar: /images/avatar.jpg
