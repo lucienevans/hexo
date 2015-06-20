@@ -7,7 +7,7 @@ categories:
 date: 2014-08-27 21:24:08
 ---
 
-[toc]
+
 
 Android框架包含了对多种摄像头和摄像特性的支持，应用程序可以进行图片和视频的捕获。
 
@@ -68,7 +68,8 @@ Android框架包含了对多种摄像头和摄像特性的支持，应用程序�
 
 *   [MediaStore.EXTRA_OUTPUT](http://developer.android.com/reference/android/provider/MediaStore.html#EXTRA_OUTPUT)——本设置需要一个 [Uri](http://developer.android.com/reference/android/net/Uri.html)对象，用于指定存放图片的路径和文件名。本设置是可选项，但强烈建议使用。如果未指定本设置值，那么摄像应用将会把所请求的图片以默认文件名和路径进行保存，并将数据置入intent的 [Intent.getData()](http://developer.android.com/reference/android/content/Intent.html#getData())部分返回。
 以下例子演示了如何构建并执行一个图像捕获intent。此例中的<span style="color: #007000;">getOutputMediaFileUri()</span> 方法引自[保存媒体文件](http://blog.sina.com.cn/s/blog_48d491300100ztl9.html#saveFile)中的例程代码。
-<pre class="lang:default decode:true">private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE=100;
+```java
+private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE=100;
 
 private Uri fileUri;
 
@@ -96,7 +97,8 @@ public void onCreate (Bundle  savedInstanceState){
 
   startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
-}</pre>
+}
+```
 [startActivityForResult()](http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,%20int)) 方法执行完毕后，用户将看到内置摄像头应用程序的界面。用户拍照完毕（或取消操作）后，用户界面返回应用程序，这时必须截获 [onActivityResult()](http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int,%20int,%20android.content.Intent)) 方法来接收intent的返回结果并执行后续操作。关于如何接收完整的intent，请参阅 接收摄像头Intent的结果。
 
 ### 捕获视频的intent
@@ -108,7 +110,9 @@ public void onCreate (Bundle  savedInstanceState){
 *   [MediaStore.EXTRA_DURATION_LIMIT](http://developer.android.com/reference/android/provider/MediaStore.html#EXTRA_DURATION_LIMIT)——本值用于限制所捕获视频的长度，以秒为单位。
 *   [MediaStore.EXTRA_SIZE_LIMIT](http://developer.android.com/reference/android/provider/MediaStore.html#EXTRA_SIZE_LIMIT)——本值用于限制所捕获视频的文件尺寸，以字节为单位。
 以下例子演示了如何构建并执行一个视频捕获intent。本例中的<span style="color: #007000;">getOutputMediaFileUri()</span>方法引自 [保存媒体文件](http://blog.sina.com.cn/s/blog_48d491300100ztl9.html#saveFile)中的例程代码。
-<pre class="lang:default decode:true ">private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE =200;
+<pre class="lang:default decode:true ">
+```java
+private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE =200;
 
 private Uri fileUri;
 
@@ -140,7 +144,8 @@ public void onCreate(Bundle savedInstanceState){
 
   startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
 
-}</pre>
+}
+```
 [startActivityForResult()](http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,%20int)) 方法执行完毕后，用户将看到一个改动过的摄像程序界面。用户摄像完毕（或取消操作）后，用户界面返回应用程序，这时必须截获 [onActivityResult()](http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int,%20int,%20android.content.Intent)) 方法来接收intent的返回结果并执行后续操作。关于如何接收完整的intent，请参阅下一节。
 
 ### 接受摄像头的结果
@@ -148,7 +153,9 @@ public void onCreate(Bundle savedInstanceState){
 一旦已构建并运行了图像或视频的摄像头intent，应用程序就必须进行设置，以接收intent返回的结果。本节展示了如何 截获摄像头intent的回调方法，以便应用程序对捕获到的图片及视频进行进一步的处理。
 
 要接收intent的返回结果，必须覆盖启动intent的activity中的 [onActivityResult()](http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int,%20int,%20android.content.Intent))方法。以下例子演示了如何覆盖[onActivityResult()](http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int,%20int,%20android.content.Intent))来获取上述章节例程中的 [图像捕获intent](http://blog.sina.com.cn/s/blog_48d491300100ztl9.html#intent_image)或 [视频捕获intent](http://blog.sina.com.cn/s/blog_48d491300100ztl9.html#intent_video)的结果。
-<pre class="lang:default decode:true">private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+<pre class="lang:default decode:true">
+```java
+private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
 private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
 
@@ -193,9 +200,8 @@ private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
    //视频捕获失败，提示用户
     }
   }
-}</pre>
+}
+```
 一旦activity接收到成功的结果，就说明捕获到的图像或视频已保存到指定位置了，应用程序就可对其进行访问。
-
-&nbsp;
 
 **原文地址：[http://blog.sina.com.cn/s/blog_48d491300100ztl9.html](http://blog.sina.com.cn/s/blog_48d491300100ztl9.html)**

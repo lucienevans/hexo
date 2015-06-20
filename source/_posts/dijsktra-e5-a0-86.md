@@ -12,7 +12,8 @@ Dijkstra算法是求图中最短路的算法。最原始的Dijsktra算法，使�
 <!-- more -->
 
 下面是Dijsktra+小顶堆的demo代码：
-<pre class="lang:default decode:true ">#include&lt;stdio.h&gt;
+```
+#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #include&lt;queue&gt;
 #include&lt;vector&gt;
@@ -73,5 +74,5 @@ int main(){
 			printf("1--&gt;%d:%d\n",i,dist[i]);
 	}
 	return 0;
-}</pre>
-&nbsp;
+}
+```
