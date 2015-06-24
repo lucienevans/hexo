@@ -23,13 +23,15 @@ date: 2014-10-14 10:46:16
 2.  如果$(u,v)$在第$l+k$层网络，那么我们将$v$的gap置为$v$到$u$邻居边界的距离，然后继续在第$l+k$层网络中进行Dijkstra算法。
 图1表示了这一过程。
 
-[![Query 1](http://www.lucienevans.com/wp-content/uploads/2014/10/Query-1.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115275) 图 1.公路层次查询一个简要的图示
+![Query 1](http://7xjv88.com1.z0.glb.clouddn.com/Query-1.png)
+图 1.公路层次查询一个简要的图示
 
 除此之外，我们还要解决一个问题：$l$层的入口不在该层网络的核心内，而是一个绕过的点（bypassed nodes）。这时候算法会在bypassed nodes中继续进行直到第$l$层的核心点$u$到达，$u$的gap置为$u$在网络层次$l$中的邻居半径。注意：在$u$没到达之前，bypassed nodes的gap都是无穷大的。
 
 在网络核心中我们仍然进行Dijkstra算法，但是要注意一点：当一点$u \in {V_l}'$被搜索过了，任何一条指向一个bypassed node$v \in {B_l}$的边都不会被松弛；也就是说，当我们进入一个网络核心时，就不会再离开这个核心（除非要进入上一层网络）。这就是约束2！
 
-[![Query 2](http://www.lucienevans.com/wp-content/uploads/2014/10/Query-2.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115276) 图 2.一个搜索的详细的例子。网络层次0、1、2分别用红线、蓝线、绿线表示，淡蓝色的点表示bypassed nodes，深蓝色的点表示核心
+![Query 2](http://7xjv88.com1.z0.glb.clouddn.com/Query-2.png)
+图 2.一个搜索的详细的例子。网络层次0、1、2分别用红线、蓝线、绿线表示，淡蓝色的点表示bypassed nodes，深蓝色的点表示核心
 
 图2演示了搜索的具体过程。搜索从起点$s$开始，$s$的gap是它在第0层网络中的邻居半径，在$s$的邻居中，我们进行标准的Dijkstra算法。点$u$跑出$s$的邻居范围了，但是$u$仍在第0层，根据约束1我们不松弛它。离开${s_1}$的边在第1层，所以我们松弛它，但是${s_1}$及其子节点都是bypassed nodes，所以它们的gap都是无穷大的。在${s_1}'$点，我们离开了bypassed nodes进入了第1层网络的核心，我们将${s_1}'$的gap置为其在第1层网络的邻居半径，并且在其邻居半径内继续进行标准的Dijkstra算法。注意点$v$没有被松弛因为$s$是一个第1层的bypassed node（根据约束2）。在${s_2}'$点，我们没有通过bypassed nodes进入第2层，而是通过一条捷径直接进入第2层的核心，然后继续在第2层的核心进行搜索算法。
 
@@ -45,7 +47,7 @@ date: 2014-10-14 10:46:16
 
 下图是基本算法的伪代码：
 
-![捕获](http://7xjv88.com1.z0.glb.clouddn.com/1435115278)
+![捕获](http://7xjv88.com1.z0.glb.clouddn.com/\346%8D%95\350%8E\267.png.2)
 
 解释：
 
@@ -77,7 +79,8 @@ date: 2014-10-14 10:46:16
 
 在双向Dijkstra算法中，当算法的正向搜索和反向搜索相交时，我们就终止算法，所得的路径就是最短路径！而在上述的双向Highway Hierarchies搜索中，这样的结论并不成立。下图就是一个例子：
 
-[![Query 4](http://www.lucienevans.com/wp-content/uploads/2014/10/Query-4.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115280) 图 4.算法终止条件的一个例子
+![Query 4](http://7xjv88.com1.z0.glb.clouddn.com/Query-4.png)
+图 4.算法终止条件的一个例子
 
 图4中上面的搜索路径是应用这样的一个策略：每次选择方向时选择队列中元素多的那个方向。这样是可以得到几乎对称的路径，但我们不能保证这是一条最短路径，其实图4下面的路径才是一条最短路径，由于图中每个点的邻居半径是不等的，我们在搜索时极容易出现图4下面这样的情况：当反向搜索到b点时，正向搜索卡住在c点，由于我们的算法不能从高层次降到低层次，所以正向搜索到c点后就不会再运行了，只有等待反向搜索搜索到c点时才能得到一条路径。那么我们在搜索到图4上面的路径时就终止算法显然是错误的。
 
@@ -103,17 +106,16 @@ date: 2014-10-14 10:46:16
 
 现实中的公路还有一些禁止转向的路段，比如，一个U字型的转弯被禁止：
 
-[![U字转弯](http://www.lucienevans.com/wp-content/uploads/2014/10/捕获1.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115281)
-
-&nbsp;
+![U字转弯](http://7xjv88.com1.z0.glb.clouddn.com/\346%8D%95\350%8E\2671.png.2)
 
 一般对于这种情况有两种解决方法：
 
-1.  修改寻路算法，将禁止转向的几个路段存储起来，当寻路的时候判断寻找的路是否可行，具体可参考：<span style="color: #000000;">[MODELLING TURNING RESTRICTIONS IN TRAFFIC NETWORK FOR VEHICLE NAVIGATION SYSTEM](http://www.isprs.org/proceedings/xxxiv/part4/pdfpapers/410.pdf)。
+1.  修改寻路算法，将禁止转向的几个路段存储起来，当寻路的时候判断寻找的路是否可行，具体可参考：[MODELLING TURNING RESTRICTIONS IN TRAFFIC NETWORK FOR VEHICLE NAVIGATION SYSTEM](http://www.isprs.org/proceedings/xxxiv/part4/pdfpapers/410.pdf)。
 
 2.  修改原图，引入人造节点和人造路段，如下图所示：
 
-[![turnning restriction](http://www.lucienevans.com/wp-content/uploads/2014/10/turning-restriction.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115282) 图 5.给一个有转向限制的十字路口添加人造节点和人造路段
+![turnning restriction](http://7xjv88.com1.z0.glb.clouddn.com/turning-restriction.png)
+图 5.给一个有转向限制的十字路口添加人造节点和人造路段
 
 这样虽然会产生很多节点和路段，但是不用修改寻路算法。
 在CH算法中，我们选用上述第2种方法处理路段的转向限制。因为一般添加的人造节点的度都会比较小，所以在构层次图的时候，会很早地就把他们省略，所以对于上层网络构图没有太大的影响，也就是说我们把方法2带来的内存开销大等坏处控制在低层次的网络中。

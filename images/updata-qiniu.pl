@@ -11,9 +11,12 @@ foreach my $doc (@ARGV) {
         chomp;
         my $line = $_;
         if ( $line =~ /\!\[[\D\d]+\]\(([\D\d]+)\)/ ) {
-            my $file_name = time;
             my $url       = $1;
-            `wget $1 -O ./$file_name`;
+            `wget $1 -o ./log`;
+            my $file_name = `grep \'Saving to:\' ./log`;
+            $file_name =~ /\'([\d\D]+)\'/;
+            $file_name = $1;
+            print $file_name;
             `qboxrsctl put -c blog $file_name ./$file_name`;
             `rm -f $file_name`;
             $line =~

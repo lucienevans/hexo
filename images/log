@@ -1,0 +1,11 @@
+--2015-06-24 12:05:24--  http://www.lucienevans.com/wp-content/uploads/2014/10/turning-restriction.png
+Resolving www.lucienevans.com... 123.1.151.40
+Connecting to www.lucienevans.com|123.1.151.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15682 (15K) [image/png]
+Saving to: 'turning-restriction.png'
+
+     0K .......... .....                                      100%  326K=0.05s
+
+2015-06-24 12:05:24 (326 KB/s) - 'turning-restriction.png' saved [15682/15682]
+
