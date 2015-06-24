@@ -29,7 +29,7 @@ Latex虽说可以完美的显示各种公式，但是其复杂的语法实在让
 *   一种是专业的Latex编辑器，例如TexMaths、Texmaker等。
 其实有一种更常用更简单的方法，就是使用著名的MathType编辑Latex公式，在MathType中设置选项——&gt;剪贴和复制选项如下：
 
-[![](http://www.lucienevans.com/wp-content/uploads/2014/09/MathType设置.png)](http://www.lucienevans.com/wp-content/uploads/2014/09/MathType设置.png)
+[![](http://www.lucienevans.com/wp-content/uploads/2014/09/MathType设置.png)](http://7xjv88.com1.z0.glb.clouddn.com/1435115273)
 
 &nbsp;
 
